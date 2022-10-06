@@ -1,0 +1,20 @@
+{
+    "name": "clases/tienda-online",
+    "description": "creacion tienda online",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "nadin perez",
+            "email": "nadinperez6@gmail.com"
+        }
+    ],
+    "require": {
+
+    },
+    "autoload": {
+        "psr-4":{
+            "Clases\\":"src/"
+        }
+    }
+}
