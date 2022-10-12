@@ -27,7 +27,7 @@ class Pelicula
         $this->host ='localhost';
         $this->db ='nadin';
         $this->user = 'root';
-        $this->password = '';
+        $this->password = 'estudiorocha123';
         $this->database = 'utf8mb4';
     }
 
@@ -64,9 +64,10 @@ class Pelicula
 
     public function actualizar($_params)
     {
-        $query = $this->connect()->prepare("UPDATE `peliculas` SET `titulo`=:titulo,`descripcion`=:descripcion,`foto`=:foto,`precio`=:precio,`categoria_id`=:categoria_id,`fecha`=:fecha WHERE 'id' =:id");
+        $query = $this->connect()->prepare("UPDATE peliculas SET `titulo`=:titulo,`descripcion`=:descripcion,`foto`=:foto,`precio`=:precio,`categoria_id`=:categoria_id,`fecha`=:fecha WHERE 'id' =:id");
 
         try {
+            
             $query->execute($_params);
 
             return true;
@@ -95,51 +96,48 @@ class Pelicula
     
         
     // }
+    public function mostrar()
+    {
+        $items = [];
+
+        try {
+            $query = $this->connect()->query("SELECT peliculas.id, titulo, descripcion, foto,nombre,precio,fecha,estado FROM peliculas
+            INNER JOIN categorias
+            ON peliculas.categoria_id = categorias.id ORDER BY peliculas.id DESC");
+
+            while ($row = $query->fetch()) {
+                array_push($items, $row);
+            }
+
+            return $items;
+        } catch (\PDOException $e) {
+            return [];
+        }
+    }
     
-    public function eliminar($id){
-        $sql = "DELETE FROM `peliculas` WHERE 'id'=:id";
+    public function mostrarPorId($id)
+    {
+        $query = $this->connect()->prepare("SELECT * FROM peliculas  WHERE id ='" . $id . "'");
+        try {
+            $query->execute();
+            $row = $query->fetch();
+            return $row;
+        } catch (\PDOException $e) {
+            return null;
+        }
+    }
 
-        $resultado = $this->cn->prepare($sql);
-        
-        $_array = array(
-            ":id" => $id['id']
-        );
 
-        if($resultado->execute($_array))
+    public function eliminar($id)
+    {
+
+        $query = $this->connect()->prepare("DELETE FROM peliculas  WHERE id ='" . $id . "'");
+        try {
+            $query->execute();
             return true;
-        return false;
-        
-    }
-    
-    public function mostrar(){
-        $sql = "SELECT peliculas.id, titulo, descripcion, foto,nombre,precio,fecha,estado FROM peliculas
-        INNER JOIN categorias
-        ON peliculas.categoria_id = categorias.id ORDER BY peliculas.id DESC";
-
-        $resultado = $this->cn->prepare($sql);
-        
-        if($resultado->execute())
-            return $resultado->fetchAll();
-
-        return false;
-        
-    }
-    
-    public function mostrarPorId($id){
-        $sql = "SELECT * FROM 'peliculas' WHERE 'id' = :id";
-
-        $resultado = $this->cn->prepare($sql);
-        $_array = array(
-            ":id" => $id['id']
-        );
-        
-        if($resultado->execute($_array))
-            return $resultado->fetch();
-
-        return false;
-
-        
+        } catch (\PDOException $e) {
+            return false;
+        }
     }
 }
 
-?>

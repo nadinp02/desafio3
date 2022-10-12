@@ -42,10 +42,51 @@
   </nav>
 
   <div class="container" id="main">
+    <div class="row">
     <?php
-    require 'vendor/autoload.php';
-    $pelicula = new Clases\Pelicula;
-    ?>
+       require 'vendor/autoload.php';
+       $pelicula = new Clases\Pelicula;
+       $info_peliculas = $pelicula->mostrar();
+       $cantidad = count($info_peliculas);
+
+       if($cantidad > 0){
+        for($x =0; $x < $cantidad; $x++){
+          $item = $info_peliculas[$x];
+        ?>
+        <div class="col-md-3">
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class=" titulo-pelicula text-center "><?php print $item['titulo'] ?></h4>
+            </div>
+            <div class="panel-body">
+            <?php
+               $foto = 'upload/'.$item['foto'];
+                if(file_exists($foto)){
+                ?>
+                <img src="<?php print $foto; ?>" class="img/responsive">
+                <?php }else{ ?>
+                  <img src="assets/imagenes/not-found.jpg" class="img/responsive">
+                                    
+                <?php }?> 
+            </div>
+          </div>
+
+          <div class="panel-footer">
+            <a href="carrito.php?id=<?php print $item['id'] ?>" class="btn btn-success btn-block">
+              <span class="glyphicon glyphicon-shopping-cart">Comprar</span>
+            </a>
+
+          </div>
+        </div>
+
+
+        <?php }
+      }else{?>
+          <h4>No hay registros</h4>
+
+      <?php } ?>
+    </div>
 
 
   </div> <!-- /container -->

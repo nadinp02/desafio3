@@ -82,6 +82,9 @@
                                 <select class="form-control" name="categoria_id" required>
                                     <option value="">--SELECCIONE--</option>
                                     <option value="1">ACCION</option>
+                                    <option value="2">COMEDIA</option>
+                                    <option value="3">TERROR</option>
+                                    <option value="4">ROMANCE</option>
                                 </select>
                             </div>
                         </div>

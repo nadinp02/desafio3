@@ -1,3 +1,22 @@
+<?php 
+require '../../vendor/autoload.php';
+$pelicula = new Clases\Pelicula;
+
+if(isset($_GET['id']) && is_numeric($_GET['id'])){
+    $id = $_GET['id'];
+
+    $resultado = $pelicula->mostrarPorId($id);
+
+    if(!$resultado)
+    header('Location: index.php');
+}else{
+    header('Location: index.php');
+}
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,6 +73,7 @@
     </nav>
 
     <div class="container" id="main" method="../acciones.php" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="<?php print $resultado['id']?>">
         <div class="row">
             <div class="col-md-12">
                 <fieldset>
@@ -63,7 +83,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Titulo</label>
-                                <input type="text" class="form-control" name="titulo" required>
+                                <input value="<?php print $resultado['titulo']?>" type="text" class="form-control" name="titulo" required>
                             </div>
                         </div>
                     </div>
@@ -71,7 +91,7 @@
                         <div class="col-md-10">
                             <div class="form-group">
                                 <label>Descripcion</label>
-                                <textarea class="form-control" name="descripcion" id="" cols="3" required></textarea>
+                                <textarea class="form-control" name="descripcion" id="" cols="3" required><?php print $resultado['descripcion']?></textarea>
                             </div>
                         </div>
                     </div>
@@ -81,6 +101,10 @@
                                 <label>Categoria</label>
                                 <select class="form-control" name="categoria_id" required>
                                     <option value="">--SELECCIONE--</option>
+                                    <option value="1">ACCION</option>
+                                    <option value="2">COMEDIA</option>
+                                    <option value="3">TERROR</option>
+                                    <option value="4">ROMANCE</option>
                                 </select>
                             </div>
                         </div>
@@ -89,7 +113,8 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Foto</label>
-                                <input type="file" class="form-control" name="foto" required>
+                                <input type="file" class="form-control" name="foto">
+                                <input type="hidden" name="foto_temp" value="<?php print $resultado['foto']?>">
                             </div>
                         </div>
                     </div>
@@ -97,18 +122,17 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Precio</label>
-                                <input type="text" class="form-control" name="precio" placeholder=".0.00" required>
+                                <input value="<?php print $resultado['precio']?>" type="text" class="form-control" name="precio" placeholder=".0.00" required>
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                    <input type="submit" class="btn btn-primary" name="accion" value="Actualizar"></input>
                     <a href="index.php" class="btn btn-default">Cancelar</a>
                 </form>
                 </fieldset>
 
             </div>
         </div>
-
 
     </div> <!-- /container -->
 

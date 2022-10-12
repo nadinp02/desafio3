@@ -83,23 +83,35 @@
                         $pelicula = new Clases\Pelicula;
 
                         $info_pelicula = $pelicula->mostrar();
-                        // print_r($info_pelicula);
-                        // die;
+                        
                         $cantidad = count($info_pelicula);
                         if($cantidad > 0){
-                            for($x=0; $x < $cantidad; $x++ ){
+                            $c=0;
+                        for($i =0; $i < $cantidad; $i++ ){
+                            $c++;
+                            $item = $info_pelicula[$i];
 
 
                         ?>
                             <tr>
-                                <td></td>
-                                <td>Pelicula 1</td>
-                                <td>Accion</td>
-                                <td>10</td>
-                                <td class="text-center">Foto</td>
+                                <td><?php print $c?></td>
+                                <td><?php print $item['titulo']?></td>
+                                <td><?php print $item['nombre']?></td>
+                                <td><?php print $item['precio']?></td>
                                 <td class="text-center">
-                                    <a href="" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></a>
-                                    <a href="form_actualizar.php" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-edit"></span></a>
+                                    <?php
+                                    $foto = '../../upload/'.$item['foto'];
+                                    if(file_exists($foto)){
+                                    ?>
+                                    <img src="<?php print $foto; ?>" width="50">
+                                <?php }else{ ?>
+                                    -
+                                <?php }?>
+                                
+                                </td>
+                                <td class="text-center">
+                                    <a href="../acciones.php?id=<?php print $item['id']?>" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></a>
+                                    <a href="form_actualizar.php?id=<?php print $item['id'] ?>" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-edit"></span></a>
                                 </td>
 
                             </tr>
