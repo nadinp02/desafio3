@@ -105,7 +105,7 @@
                                     ?>
                                     <img src="<?php print $foto; ?>" width="50">
                                 <?php }else{ ?>
-                                    -
+                                    
                                 <?php }?>
                                 
                                 </td>
