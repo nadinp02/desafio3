@@ -15,7 +15,7 @@ class Pelicula
         $this->host ='localhost';
         $this->db ='nadin';
         $this->user = 'root';
-        $this->password = 'estudiorocha123';
+        $this->password = '';
         $this->database = 'utf8mb4';
     }
 
@@ -43,7 +43,6 @@ class Pelicula
             $query->execute($_params);
             return true;
         } catch (\PDOException $e) {
-            var_dump($e);
             return false;
         }
 

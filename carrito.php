@@ -157,6 +157,22 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             </tfoot>
         </table>
 
+        <hr>
+        <?php
+        if(isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])){
+        ?>
+        <div class="row">
+            <div class="pull-left">
+                <a href="index.php" class="btn btn-info">Seguir Comprando</a>
+            </div>
+            <div class="pull-right">
+                <a href="finalizar.php" class="btn btn-success">Finalizar Compra</a>
+            </div>
+        </div>
+        <?php
+        }
+        ?>
+
     </div> <!-- /container -->
 
 
