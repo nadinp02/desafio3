@@ -37,7 +37,7 @@
 
     <div class="container" id="main">
         <div class="main-login">
-            <form action="log.php" method="post">
+            <form action="login.php" method="post">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class ="text-center">ACCESOS AL PANEL</h3>

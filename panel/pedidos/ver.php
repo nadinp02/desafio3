@@ -1,3 +1,10 @@
+<?php
+session_start();
+
+if(!isset($_SESSION['usuario_info']) OR empty($_SESSION['usuario_info']))
+header('Location:index.php');
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,9 +46,9 @@
                         <a href="../peliculas/index.php" class="btn">Peliculas</a>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">admin <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php print $_SESSION['usuario_info']['nombre_usuario']?><span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Salir</a></li>
+                            <li><a href="../cerrar_sesion.php">Salir</a></li>
                         </ul>
                     </li>
 
@@ -63,6 +70,7 @@
                         $pedido = new Clases\Pedido;
                         //ver
                         $info_pedido = $pedido->mostrarPorId($id);
+
                         $info_detalle_pedido = $pedido->mostrarDetallePorIdPedido($id);
 
                     ?>
@@ -160,11 +168,11 @@
 
                 </fieldset>
                 <div class="pull-left">
-                <a href="index.php" class="btn btn-default">Cancelar</a>
+                <a href="index.php" class="btn btn-default hidden-print">Cancelar</a>
                 </div>
 
                 <div class="pull-right">
-                <a href="javascript:;" id="btnImprimir" class="btn btn-danger">Imprimir</a>
+                <a href="javascript:;" id="btnImprimir" class="btn btn-danger hidden-print">Imprimir</a>
                 </div>
 
             </div>
@@ -179,6 +187,12 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="../../assets/js/jquery.min.js"></script>
     <script src=".././/assets/js/bootstrap.min.js"></script>
+    <script>
+        $('#btnImprimir').on('click',function(){
+            window.print()
+            return false;
+        })
+    </script>
 
 </body>
 

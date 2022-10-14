@@ -79,24 +79,37 @@ class Pedido
         }
     }
 
-    //ver
-    public function mostrarPorId($id)
+    public function mostrarUltimos()
     {
         $items = [];
 
         try {
-
             $query = $this->connect()->query("SELECT p.id, nombre, apellido, email, total, fecha FROM pedidos p 
-            INNER JOIN clientes c ON p.cliente_id = c.id WHERE p.id = :id");
+            INNER JOIN clientes c ON p.cliente_id = c.id ORDER BY p.id DESC LIMIT 10");
 
             while ($row = $query->fetch()) {
                 array_push($items, $row);
             }
 
-
             return $items;
         } catch (\PDOException $e) {
             return [];
+        }
+    }
+
+
+    public function mostrarPorId($id)
+    {
+
+         $query = $this->connect()->query("SELECT p.id, nombre, apellido, email, total, fecha FROM pedidos p 
+        INNER JOIN clientes c ON p.cliente_id = c.id WHERE p.id = '" . $id . "'");
+
+        try {
+            $query->execute();
+            $row = $query->fetch();
+            return $row;
+        } catch (\PDOException $e) {
+            return null;
         }
     }
 
@@ -107,7 +120,7 @@ class Pedido
 
         try {
             $query = $this->connect()->query("SELECT dp.id, pe.titulo, dp.precio, dp.cantidad, pe.foto FROM detalle_pedidos dp 
-            INNER JOIN peliculas pe ON pe.id = dp.pelicula_id WHERE dp.pedido_id =:id");
+            INNER JOIN peliculas pe ON pe.id = dp.pelicula_id WHERE dp.pedido_id = '" . $id . "'");
 
             while ($row = $query->fetch()) {
                 array_push($items, $row);

@@ -51,7 +51,8 @@ class Pelicula
 
     public function actualizar($_params)
     {
-        $query = $this->connect()->prepare("UPDATE peliculas SET `titulo`=:titulo,`descripcion`=:descripcion,`foto`=:foto,`precio`=:precio,`categoria_id`=:categoria_id,`fecha`=:fecha WHERE 'id' =:id");
+
+        $query = $this->connect()->prepare("UPDATE nadin.peliculas SET `titulo`=:titulo,`descripcion`=:descripcion,`foto`=:foto,`precio`=:precio,`categoria_id`=:categoria_id,`fecha`=:fecha WHERE `id` =:id");
 
         try {
             

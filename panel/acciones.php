@@ -3,6 +3,7 @@ require '../vendor/autoload.php';
 
 $pelicula = new Clases\Pelicula;
 
+
 if($_SERVER['REQUEST_METHOD'] ==='POST'){
 
     if ($_POST['accion']==='Registrar'){
@@ -39,23 +40,22 @@ if($_SERVER['REQUEST_METHOD'] ==='POST'){
 
     }
 
-    if ($_POST['accion']==='Actualizar'){
-        var_dump($_POST);
-        die;
 
+    if ($_POST['accion']==='Actualizar'){
+        
         if(empty($_POST['titulo']))
         exit('Completar titulo');
-    
-     if(empty($_POST['descripcion']))
+        
+        if(empty($_POST['descripcion']))
         exit('Completar titulo');
-
-     if(empty($_POST['categoria_id']))
+        
+        if(empty($_POST['categoria_id']))
         exit('Seleccionar una Categoria');
-
-     if(!is_numeric($_POST['categoria_id']))
+        
+        if(!is_numeric($_POST['categoria_id']))
         exit('Seleccionar una Categoria válida');
-
-    
+        
+        
      $_params = array(
         'titulo'=>$_POST['titulo'],
         'descripcion'=>$_POST['descripcion'],
@@ -65,12 +65,14 @@ if($_SERVER['REQUEST_METHOD'] ==='POST'){
         'id'=>$_POST['id'],
     );
 
+
     if(!empty($_POST['foto_temp']))
         $_params['foto'] = $_POST['foto_temp'];
     
     if(!empty($_FILES['foto']['name']))
         $_params['foto'] = subirFoto();
 
+    
     $rpt = $pelicula->actualizar($_params);
 
     if($rpt)
@@ -109,5 +111,6 @@ function subirFoto() {
 
 
 }
+
 
 
