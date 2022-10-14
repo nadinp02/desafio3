@@ -40,6 +40,8 @@ if($_SERVER['REQUEST_METHOD'] ==='POST'){
     }
 
     if ($_POST['accion']==='Actualizar'){
+        var_dump($_POST);
+        die;
 
         if(empty($_POST['titulo']))
         exit('Completar titulo');
@@ -83,6 +85,7 @@ if($_SERVER['REQUEST_METHOD'] ==='POST'){
 if($_SERVER['REQUEST_METHOD'] ==='GET'){
     $id = $_GET['id'];
     $rpt = $pelicula->eliminar($id);
+    
 
 if($rpt)
     header('Location: peliculas/index.php');

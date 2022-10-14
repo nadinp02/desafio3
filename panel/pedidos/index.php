@@ -94,7 +94,7 @@
                                 <td><?php print $item['fecha']?></td>
                             
                                 <td class="text-center">
-                                    <a href="../ver.php?id=<?php print $item['id']?>" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                    <a href="ver.php?id=<?php print $item['id']?>" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-eye-open"></span></a>
                                 </td>
 
                             </tr>

@@ -105,6 +105,7 @@ class Pelicula
     public function mostrarPorId($id)
     {
         $query = $this->connect()->prepare("SELECT * FROM peliculas  WHERE id ='" . $id . "'");
+
         try {
             $query->execute();
             $row = $query->fetch();
